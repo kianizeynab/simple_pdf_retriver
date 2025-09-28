@@ -4,22 +4,7 @@ from collections import Counter
 import unicodedata
 
 def get_cleaned_ocr_text(ocr_text, min_header_footer_length=3, min_repetition_count=2):
-    """
-    Extract and clean OCR text by removing noise, normalizing, fixing line breaks,
-    and removing repeated headers/footers.
-    """
-    def remove_ocr_noise(text):
-        noise_patterns = [
-            r'\[.*?\]',            # هر چیزی داخل براکت [] را حذف کند
-            r'\{.*?\}',            # هر چیزی داخل {} را حذف کند
-            r'\(.*?\)',            # هر چیزی داخل () را حذف کند
-            r'\b\d+[^\w\s]?\d*\b', # حذف اعداد با علامت‌های وسطشون
-            r'[^\w\s.,!?;:()\-\u0600-\u06FF]',  # حذف کاراکترهای غیر از فارسی/حروف/اعداد/علائم
-            r'\s+',                # حذف فاصله‌های اضافه
-        ]
-        for pattern in noise_patterns:
-            text = re.sub(pattern, ' ', text)
-        return text.strip()
+
 
     def normalize_text(text):
         text = unicodedata.normalize('NFKC', text)
@@ -56,10 +41,9 @@ def get_cleaned_ocr_text(ocr_text, min_header_footer_length=3, min_repetition_co
         text = '. '.join([sentence.strip().capitalize() for sentence in text.split('.')])
         return '\n'.join(lines)
 
-    cleaned_text = ocr_text
-    cleaned_text = remove_ocr_noise(cleaned_text)
-    cleaned_text = normalize_text(cleaned_text)
+    cleaned_text = normalize_text(ocr_text)
     cleaned_text = fix_line_breaks(cleaned_text)
     cleaned_text = remove_repeated_headers_footers(cleaned_text, min_header_footer_length, min_repetition_count)
     cleaned_text = clean_text_structure(cleaned_text)
     return cleaned_text
+
