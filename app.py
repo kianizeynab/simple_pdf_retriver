@@ -1,6 +1,5 @@
 from build_index import build_index_main
 
-# 🔄 ساخت ایندکس در شروع
 build_index_main()
 
 from fastapi import FastAPI
@@ -25,3 +24,4 @@ def search(request: QueryRequest):
     ranked = sorted(zip(results, scores), key=lambda x: x[1], reverse=True)
     top_results = [{"metadata": r.metadata, "text": r.page_content[:500]} for r, s in ranked[:request.top_k]]
     return {"results": top_results}
+
