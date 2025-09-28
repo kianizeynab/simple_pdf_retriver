@@ -16,7 +16,8 @@ def load_vectorstore(path="vectorstore"):
     return FAISS.load_local(
         path,
         embeddings,
-        allow_dangerous_deserialization=True  # ← اینو اضافه کن
+        allow_dangerous_deserialization=True 
     )
+
 
 
