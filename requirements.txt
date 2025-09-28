@@ -1,0 +1,15 @@
+langchain
+faiss-cpu
+PyPDF2
+easyocr
+sentence-transformers
+transformers
+fastapi
+uvicorn
+pdf2image
+pillow
+langchain-community
+sentence-transformers
+faiss-cpu
+uvicorn
+pdf2image
