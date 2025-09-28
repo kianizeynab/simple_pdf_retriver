@@ -9,7 +9,3 @@ uvicorn
 pdf2image
 pillow
 langchain-community
-sentence-transformers
-faiss-cpu
-uvicorn
-pdf2image
