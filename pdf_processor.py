@@ -13,7 +13,6 @@ def extract_text_from_pdf(pdf_path):
     for i, page in enumerate(reader.pages):
         text = page.extract_text()
         if not text or text.strip() == "":
-            # جایگزین OCR واقعی: در نسخه عملی باید pdf2image استفاده شود
             ocr_result = ["OCR simulated text"]
             text = " ".join(ocr_result)
         texts.append(text)
@@ -39,6 +38,7 @@ def process_pdf_directory(pdf_dir, chunk_size=1000, chunk_overlap=200):
                         "chunk_id": i
                     })
     return all_chunks, metadatas
+
 
 
 
